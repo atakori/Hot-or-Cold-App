@@ -33,7 +33,10 @@ export default class Guesser extends React.Component {
 	}
 
 	setCurrentGuess(currentGuess) {
-		if(this.state.currentGuess === this.state.randomNumber) {
+		currentGuess = parseInt(currentGuess, 10);
+		const difference = Math.abs(currentGuess - this.state.randomNumber);
+
+		if(difference === 0) {
 			this.setState({
 				currentGuess,
 				feedback: "You Got It!",
@@ -41,16 +44,14 @@ export default class Guesser extends React.Component {
 			})
 			this.addLatestGuess(currentGuess);
 		}
-		else if(this.state.currentGuess > this.state.randomNumber && this.state.currentGuess < this.state.randomNumber +5
-			| this.state.currentGuess < this.state.randomNumber && this.state.currentGuess > this.state.randomNumber -5) {
+		else if(difference <=5) {
 			this.setState({
 				currentGuess,
 				feedback: "You're Hot!",
 				numberOfGuesses: this.state.numberOfGuesses +1
 			})
 			this.addLatestGuess(currentGuess);
-		} else if (this.state.currentGuess > this.state.randomNumber && this.state.currentGuess < this.state.randomNumber +15
-			| this.state.currentGuess < this.state.randomNumber && this.state.currentGuess > this.state.randomNumber -15) {
+		} else if (difference <=15) {
 			this.setState({
 				currentGuess,
 				feedback: "You're Warm",
