@@ -8,6 +8,14 @@ export default class userguesses extends React.Component {
 		}
 	}
     render() {
+        if(this.props.correct) {
+            return <form className='Hot_Cold_form' onSubmit= {e=> this.props.onSubmit(e)}>
+            <input type='number' placeholder='Enter Your Guess' value={this.state.value} onChange={(event) => {
+                this.setState({value: event.target.value});
+            }}/>
+            </form>
+        } 
+        else {
      return (
           <form className='Hot_Cold_form' onSubmit= {e=> this.props.onSubmit(e)}>
             <input type='number' placeholder='Enter Your Guess' value={this.state.value} onChange={(event) => {
@@ -18,5 +26,5 @@ export default class userguesses extends React.Component {
             }}>Guess</button>
         </form> 
         );
-    }
+    }}
 }

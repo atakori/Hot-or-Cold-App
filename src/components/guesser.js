@@ -12,7 +12,8 @@ export default class Guesser extends React.Component {
 			currentGuess: '',
 			pastGuesses: [],
 			randomNumber: this.randomizeNumber(),
-			feedback: "Make Your Guess"
+			feedback: "Make Your Guess",
+			correct: false
 		}
 	}
 
@@ -39,7 +40,8 @@ export default class Guesser extends React.Component {
 		if(difference === 0) {
 			this.setState({
 				currentGuess,
-				feedback: "You Got It!",
+				correct: true,
+				feedback: "You Won. Click new game to play again",
 				numberOfGuesses: this.state.numberOfGuesses +1
 			})
 			this.addLatestGuess(currentGuess);
@@ -81,7 +83,7 @@ export default class Guesser extends React.Component {
 		<div className= 'app_container'> 
 			<h2> {this.state.feedback} </h2>
 			<div className= 'middle_section'> 
-				<UserGuess value= {this.state.currentGuess} 
+				<UserGuess correct= {this.state.correct} value= {this.state.currentGuess} 
 				onSubmit= {(e) =>this.preventDefault(e)}
 				onClick= {(currentGuess) => {this.setCurrentGuess(currentGuess)}} />
 				<GuessCounter count= {this.state.numberOfGuesses} />
