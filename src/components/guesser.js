@@ -1,5 +1,6 @@
 import React from 'react';
 
+import Header from './header';
 import UserGuess from './user_guess';
 import PreviousGuesses from './past_guesses';
 import GuessCounter from './guess_counter'
@@ -77,10 +78,25 @@ export default class Guesser extends React.Component {
 		})
 	}
 
+	restartGame() {
+		this.setState({
+			numberOfGuesses: 0,
+			currentGuess: '',
+			pastGuesses: [],
+			randomNumber: this.randomizeNumber(),
+			feedback: "Make Your Guess",
+			correct: false
+		})
+	}
+
 	render() {
 
 	return (
 		<div className= 'app_container'> 
+		<div className= 'header'>
+			< Header restart={() => this.restartGame()}/>
+		</div>
+		<h1 className='title_header'> HOT or COLD</h1>
 			<h2> {this.state.feedback} </h2>
 			<div className= 'middle_section'> 
 				<UserGuess correct= {this.state.correct} value= {this.state.currentGuess} 
